@@ -1,4 +1,5 @@
 const { Schema, model } = require('mongoose');
+const reactionSchema = reqiure('./Reaction.js')
 
 // Schema to create a thought model
 const thoughtSchema = new Schema(
@@ -20,11 +21,8 @@ const thoughtSchema = new Schema(
       // Sets a default value of 12 weeks from now
       default: () => new Date(+new Date() + 84 * 24 * 60 * 60 * 1000),
     },
-    users: [
-      {
-        type: Schema.Types.ObjectId,
-        ref: 'User',
-      },
+    reactions: [
+      reactionSchema
     ],
   },
   {

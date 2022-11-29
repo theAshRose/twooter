@@ -4,6 +4,7 @@ module.exports = {
   // Get all thoughts
   getThoughts(req, res) {
     Thought.find()
+
       .then((thoughts) => res.json(thoughts))
       .catch((err) => res.status(500).json(err));
   },
@@ -12,6 +13,7 @@ module.exports = {
     Thought.findOne({ _id: req.params.thoughtId })
       .select('-__v')
       .then((thought) =>
+     
         !thought
           ? res.status(404).json({ message: 'No thought with that ID' })
           : res.json(thought)
@@ -30,12 +32,12 @@ module.exports = {
   // Delete a thought
   deleteThought(req, res) {
     Thought.findOneAndDelete({ _id: req.params.thoughtId })
-      .then((thought) =>
-        !thought
-          ? res.status(404).json({ message: 'No thought with that ID' })
-          : User.deleteMany({ _id: { $in: thought.users } })
+      .then((thought) =>{}
+        // !thought
+        //   ? res.status(404).json({ message: 'No thought with that ID' })
+        //   : User.deleteMany({ _id: { $in: thought.users } })
       )
-      .then(() => res.json({ message: 'Thought and users deleted!' }))
+      .then(() => res.json({ message: 'Thought deleted!' }))
       .catch((err) => res.status(500).json(err));
   },
   // Update a thought
@@ -52,4 +54,45 @@ module.exports = {
       )
       .catch((err) => res.status(500).json(err));
   },
-};
+    // Add an reaction to a user
+    addReaction(req, res) {
+      console.log('You are adding an reaction');
+      console.log(req.body);
+      Thought.findOneAndUpdate(
+        { _id: req.params.thoughtId },
+        { $addToSet: { reactions: req.body } },
+        { new: true }
+      )
+        .then((reaction) =>
+          !reaction
+            ? res
+                .status(404)
+                .json({ message: 'No thought found with that ID :(' })
+            : res.json(reaction)
+        )
+        .catch((err) => res.status(500).json(err));
+    },
+    // Remove reaction from a user
+    removeReaction(req, res) {
+      Thought.findOneAndUpdate(
+        { _id: req.params.thoughtId },
+        { $pull: { reaction: { reactionId: req.params.reactionId } } },
+        { runValidators: true, new: true }
+      )
+        .then((user) =>
+          !user
+            ? res
+                .status(404)
+                .json({ message: 'No user found with that ID :(' })
+            : res.json(user)
+        )
+        .catch((err) => res.status(500).json(err));
+    },
+  };
+  
+
+  // {$pull: {thoughts: req.params.toughtId}},
+  //       {new: true} put in if statement
+
+
+

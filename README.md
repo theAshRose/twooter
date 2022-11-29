@@ -2,13 +2,13 @@
 
 ## Description
 
-Here we have a wonderful, wonderful social media app. [Here is a link to the video](https://youtu.be/uVt4Q1g8DKU)
+Here we have a wonderful, wonderful mock social media app. [Here is a link to the video](https://youtu.be/VtnfT39sa04)
 
-Here is a basic program which uses NoSQL. we have a demo video showing CRUD.
+Here is a basic program which uses NoSQL. Enjoy the video and peruse the code if you're just trying to learn Mongoose! There is much to learn and see here. Enjoy!
 
 ## How to use
 
-There isnt much to use, but there is much to browse. quality content. 
+There isnt much to use, but there is much quality code to browse! watch the video to learn more!
 
 ## Screenshot of app result
 

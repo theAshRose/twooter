@@ -1,4 +1,4 @@
-const { Schema, model } = require('mongoose');
+const { Schema, model, Types } = require('mongoose');
 // const reactionSchema = reqiure('./Reaction.js')
 
 const reactionSchema = new Schema(
@@ -18,16 +18,10 @@ const reactionSchema = new Schema(
     },
     createdAt: {
       type: Date,
-      default: Date.now,
-      get: timeBandit => formatDate(timeBandit)
+      default: Date.now
     },
   },
-  {
-    toJSON: {
-      getters: true,
-    },
-    id: false,
-  }
+ 
 );
 
 // Schema to create a thought model
